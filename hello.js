@@ -21,7 +21,7 @@ class Square extends React.Component{
 			this.val = e.target.value;
 		}	
 		//console.log(this.val);
-		this.props.propTest(this.val);
+		this.props.propTest(this.val, this.props.gridId, this.props.squareId);
 	}
 	
 	
@@ -48,19 +48,19 @@ class ThreeByThreeGrid extends React.Component{
 		return (
 			<div>
 				<div style={{width:"150"}}>
-					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest}/></div>
-					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest}/></div>
-					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest}/></div>
+					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest} gridId={this.props.gridId} squareId='0'/></div>
+					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest} gridId={this.props.gridId} squareId='1'/></div>
+					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest} gridId={this.props.gridId} squareId='2'/></div>
 				</div>
 				<div  style={{width:"150"}}>
-					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest}/></div>
-					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest}/></div>
-					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest}/></div>
+					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest} gridId={this.props.gridId} squareId='3'/></div>
+					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest} gridId={this.props.gridId} squareId='4'/></div>
+					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest} gridId={this.props.gridId} squareId='5'/></div>
 				</div>
 				<div  style={{width:"150"}}>
-					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest}/></div>
-					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest}/></div>
-					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest}/></div>
+					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest} gridId={this.props.gridId} squareId='6'/></div>
+					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest} gridId={this.props.gridId} squareId='7'/></div>
+					<div style={{display:"inline-block"}}><Square propTest={this.props.propTest} gridId={this.props.gridId} squareId='8'/></div>
 				</div>
 			</div>
 		);
@@ -71,29 +71,47 @@ class SudokuGrid extends React.Component{
 	constructor(props){
 		super(props);
 		//this.test = '0';
+		this.test = this.test.bind(this);
+		this.grid = [['','','','','','','','',''], 
+		 ['','','','','','','','',''],
+		 ['','','','','','','','',''],
+		 ['','','','','','','','',''],
+		 ['','','','','','','','',''],
+		 ['','','','','','','','',''],
+		 ['','','','','','','','',''],
+		 ['','','','','','','','',''],
+		 ['','','','','','','','','']
+		];
 	}
 	
-	test(num){
-		console.log(num);
+	test(num, threeByThreeGridNo, squareNo){
+		var row = Math.floor(parseInt(threeByThreeGridNo)/3)*3 + Math.floor(parseInt(squareNo)/3);
+		var col = (parseInt(threeByThreeGridNo)%3)*3 + (parseInt(squareNo)%3);
+		//console.log(threeByThreeGridNo);
+		//console.log(squareNo);
+		//console.log(row);
+		//console.log(col);
+		this.grid[row][col] = num;
+		//console.log(this.grid);
 	}
 	
 	render(){
 		return (
 			<div>
 				<div>
-					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test}/></div>
-					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test}/></div>
-					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test}/></div>
+					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test} gridId='0'/></div>
+					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test} gridId='1'/></div>
+					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test} gridId='2'/></div>
 				</div>
 				<div>
-					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test}/></div>
-					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test}/></div>
-					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test}/></div>
+					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test} gridId='3'/></div>
+					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test} gridId='4'/></div>
+					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test} gridId='5'/></div>
 				</div>
 				<div>
-					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test}/></div>
-					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test}/></div>
-					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test}/></div>
+					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test} gridId='6'/></div>
+					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test} gridId='7'/></div>
+					<div style={{display:"inline-block"}}><ThreeByThreeGrid propTest={this.test} gridId='8'/></div>
 				</div>
 			</div>
 		);
